@@ -1,7 +1,7 @@
 # ES7 Async/Await
 
 ## Objectives
-
-
-## Resources
-* [Blocking vs. non-blocking](https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/)
+* Identify why asynchronous actions are powerful.
+* Explain how the handling of asynchronous actions have evolved in JS.
+* Refactor code with `.then()` chain to use async/await
+* Identify the benefits of utilizing async/await.
