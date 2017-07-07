@@ -1,0 +1,23 @@
+{
+  "name": "ES7-Async-Await",
+  "version": "1.0.0",
+  "description": "## Objectives",
+  "main": "ex1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamiesonbates/ES7-Async-Await.git"
+  },
+  "keywords": [],
+  "author": "Jamieson Bates <jamiesonbates@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamiesonbates/ES7-Async-Await/issues"
+  },
+  "homepage": "https://github.com/jamiesonbates/ES7-Async-Await#readme",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
