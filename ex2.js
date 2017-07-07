@@ -5,14 +5,8 @@ async function getMovies(title) {
 
   request.get(url)
     .then((data) => {
-      const promises = [];
       let movies = JSON.parse(data).Search;
-
-      for (const movie of movies) {
-        const url2 = `http://www.omdbapi.com/?apikey=8be02b5e&i=${movie.imdbID}`
-
-        promises.push(getInfo(movies, url2));
-      }
+      const promises = prepareReqs(movies);
 
       return Promise.all(promises);
     })
@@ -36,6 +30,18 @@ function getInfo(list, url) {
         }
       }
     })
+}
+
+function prepareReqs(list) {
+  const arr = [];
+
+  for (const movie of list) {
+    const url2 = `http://www.omdbapi.com/?apikey=8be02b5e&i=${movie.imdbID}`;
+
+    arr.push(getInfo(list, url2));
+  }
+
+  return arr;
 }
 
 getMovies('Star Wars');
