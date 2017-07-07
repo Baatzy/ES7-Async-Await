@@ -1,43 +1,40 @@
 const request = require('request-promise');
 
 async function getMovies(title) {
-  const url = `http://www.omdbapi.com/?apikey=8be02b5e&s=${title}`
-  let movies;
+  const url = `http://www.omdbapi.com/?apikey=8be02b5e&s=${title}`;
 
-  return sendRequest(url)
+  request.get(url)
     .then((data) => {
       const promises = [];
-
-      movies = data.Search;
+      let movies = JSON.parse(data).Search;
 
       for (const movie of movies) {
         const url2 = `http://www.omdbapi.com/?apikey=8be02b5e&i=${movie.imdbID}`
 
-        promises.push(sendRequest(url2));
+        promises.push(getInfo(movies, url2));
       }
 
       return Promise.all(promises);
     })
     .then((data) => {
-      movies = movies.map(movie => {
-        for (const dat of data) {
-          if (movie.imdbID === dat.imdbID) {
-            movie.plot = dat.Plot;
-            movie.actors = dat.Actors;
-
-            return movie;
-          }
-        }
-      })
-
-      console.log(movies)
+      console.log(data);
     });
 }
 
-function sendRequest(url) {
+function getInfo(list, url) {
   return request.get(url)
     .then((data) => {
-      return JSON.parse(data);
+      const info = JSON.parse(data);
+      let moviePlus;
+
+      for (const movie of list) {
+        if (movie.imdbID === info.imdbID) {
+          movie.plot = info.Plot;
+          movie.actors = info.Actors;
+
+          return movie;
+        }
+      }
     })
 }
 
